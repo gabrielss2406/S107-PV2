@@ -11,7 +11,10 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'go build ./...'
+                script {
+                    sh 'GOOS=windows GOARCH=amd64 go build -o todolist.exe'
+                }
+                archiveArtifacts artifacts: 'todolist.exe', fingerprint: true
             }
         }
 
