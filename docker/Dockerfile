@@ -2,7 +2,7 @@
 FROM jenkins/jenkins:lts
 
 # Defina a versão do Go que você deseja instalar
-ENV GO_VERSION 1.20.5
+ENV GO_VERSION 1.23.2
 
 # Instale dependências necessárias
 USER root
