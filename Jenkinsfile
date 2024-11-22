@@ -3,6 +3,20 @@ pipeline {
     agent any
 
     stages {
+
+        stage('Use GitHub Token') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                        sh """
+                        echo "Using GitHub Token"
+                        docker login ghcr.io -u your-username --password-stdin <<< "$GITHUB_TOKEN"
+                        """
+                    }
+                }
+            }
+        }
+        
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/gabrielss2406/S107-PV2'
