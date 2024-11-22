@@ -27,4 +27,5 @@ pipeline {
             echo 'Pipeline completo!'
         }
     }
+    
 }
