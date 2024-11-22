@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/gabrielss2406/C214-Seminario'
+                git branch: 'main', url: 'https://github.com/gabrielss2406/S107-PV2'
             }
         }
 
