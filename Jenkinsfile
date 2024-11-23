@@ -10,7 +10,6 @@ pipeline {
                     withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                         sh """
                         echo "Using GitHub Token"
-                        docker login ghcr.io -u your-username --password-stdin <<< "$GITHUB_TOKEN"
                         """
                     }
                 }
