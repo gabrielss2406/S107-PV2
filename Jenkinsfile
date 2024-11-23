@@ -4,22 +4,15 @@ pipeline {
 
     stages {
 
-        stage('Test Credentials') {
+        stage('Checkout') {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
-                        sh """
-                        echo "Token value: \$GITHUB_TOKEN"
-                        """
+                        git url: 'https://github.com/gabrielss2406/S107-PV2',
+                            credentialsId: 'github-token',
+                            branch: 'main'
                     }
                 }
-            }
-        }
-
-        
-        stage('Checkout') {
-            steps {
-                git credentialsId: 'github-token', branch: 'main', url: 'https://github.com/gabrielss2406/S107-PV2'
             }
         }
 
