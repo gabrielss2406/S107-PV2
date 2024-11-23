@@ -1,9 +1,11 @@
 pipeline {
-    
     agent any
 
-    stages {
+    environment {
+        EMAIL_ADDRESS = "${env.EMAIL_ADDRESS}" // Variável de ambiente
+    }
 
+    stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', 
@@ -26,6 +28,15 @@ pipeline {
                 sh 'go test ./... -v'
             }
         }
+
+        stage('Notify') {
+            steps {
+                script {
+                    // Enviar email usando o comando mail
+                    sh "echo 'Pipeline executado!' | mail -s 'Status do Jenkins Pipeline' ${EMAIL_ADDRESS}"
+                }
+            }
+        }
     }
 
     post {
@@ -33,5 +44,4 @@ pipeline {
             echo 'Pipeline completo!'
         }
     }
-    
 }
