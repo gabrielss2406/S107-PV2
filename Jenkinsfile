@@ -18,7 +18,7 @@ pipeline {
         
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/gabrielss2406/S107-PV2'
+                git credentialsId: 'github-token', branch: 'main', url: 'https://github.com/gabrielss2406/S107-PV2'
             }
         }
 
