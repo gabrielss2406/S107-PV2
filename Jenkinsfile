@@ -6,9 +6,12 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', 
-                    credentialsId: 'github-token', 
-                    url: 'https://github.com/gabrielss2406/S107-PV2'
+                script {
+                    withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                        def gitUrl = "https://x-access-token:${GITHUB_TOKEN}@github.com/gabrielss2406/S107-PV2.git"
+                        git url: gitUrl, branch: 'main'
+                    }
+                }
             }
         }
 
