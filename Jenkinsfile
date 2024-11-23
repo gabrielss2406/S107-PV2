@@ -4,17 +4,18 @@ pipeline {
 
     stages {
 
-        stage('Use GitHub Token') {
+        stage('Test Credentials') {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                         sh """
-                        echo "Using GitHub Token"
+                        echo "Token value: \$GITHUB_TOKEN"
                         """
                     }
                 }
             }
         }
+
         
         stage('Checkout') {
             steps {
