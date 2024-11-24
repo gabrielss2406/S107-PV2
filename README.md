@@ -1,3 +1,5 @@
+
+
 # ToDo List em Go
 
 Um simples aplicativo de ToDo List desenvolvido em Go. Este projeto permite adicionar tarefas, listar tarefas e marcar tarefas como concluídas.
@@ -55,3 +57,27 @@ go get github.com/vakenbolt/go-test-report@latest
 go install github.com/vakenbolt/go-test-report@latest
 go test -json ./tests | go-test-report -o test_report.html
 ```
+
+## Configurando o ambiente Docker/Jenkins
+para que o Jenkins tenha acesso ao repositório privado do github, é necessário que seja configurado na pipeline com as Credentials de usuário e Secret Text, ambas contendo o PAT (Personal Authentication Token)
+
+
+
+
+## Configurar envio de email no Jenkins
+Caso tenha ```vi``` ou ```nano``` instalado no container, basta editar o `var/jenkins_home/cat hudson.plugins.emailext.ExtendedEmailPublisher.xml`
+
+
+Caso não haja, podemos editar dessa maneira:
+
+Copie o arquivo para o host para edição fora do container:
+```bash
+  docker cp <nome_do_container>:/var/jenkins_home/hudson.plugins.emailext.ExtendedEmailPublisher.xml .
+
+```
+Após editar o arquivo, volte para o container, caso necessário:
+```
+  docker cp hudson.plugins.emailext.ExtendedEmailPublisher.xml <nome_do_container>:/var/jenkins_home/
+```
+
+- também é necessário configurar as variáveis de ambiente, que nesse caso é a ```EMAIL_TO``` que define quem receberá o email de notificação
