@@ -29,12 +29,9 @@ pipeline {
                     // Instalar dependências
                     sh 'go mod tidy'
 
-                    // Baixar e instalar go-test-report
-                    sh 'go get github.com/vakenbolt/go-test-report@latest'
+                   // Baixar e instalar go-test-report
                     sh 'go install github.com/vakenbolt/go-test-report@latest'
-
-                    // Rodar testes e gerar o relatório em HTML
-                    sh 'go test -json ./tests | go-test-report -o test_report.html'
+                    sh 'export PATH=$PATH:$HOME/go/bin && go test -json ./tests | go-test-report -o test_report.html'
 
                     // Arquivar o relatório como artefato
                     archiveArtifacts artifacts: 'test_report.html', fingerprint: true
