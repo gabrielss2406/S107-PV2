@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        EMAIL_ADDRESS = "${env.EMAIL_ADDRESS}" // Variável de ambiente
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -26,14 +22,12 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Instalar dependências
                     sh 'go mod tidy'
 
-                   // Baixar e instalar go-test-report
                     sh 'go install github.com/vakenbolt/go-test-report@latest'
+                    
                     sh 'export PATH=$PATH:$HOME/go/bin && go test -json ./tests | go-test-report -o test_report.html'
 
-                    // Arquivar o relatório como artefato
                     archiveArtifacts artifacts: 'test_report.html', fingerprint: true
                 }
             }
