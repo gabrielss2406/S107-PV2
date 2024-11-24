@@ -41,10 +41,15 @@ pipeline {
 
         stage('Notify') {
             steps {
-                script {
-                    // Enviar email usando o comando mail
-                    sh "echo 'Pipeline executado!' | mail -s 'Status do Jenkins Pipeline' ${EMAIL_ADDRESS}"
-                }
+                emailext(
+                    subject: 'Status do Jenkins Pipeline',
+                    body: """
+                        <p>O pipeline foi executado.</p>
+                        <p>Status: <b>${currentBuild.currentResult}</b></p>
+                    """,
+                    mimeType: 'text/html',
+                    to: "${env.EMAIL_TO}",
+                )
             }
         }
     }
