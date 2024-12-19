@@ -1,4 +1,5 @@
-
+# Jenkins
+CI com Jenkins, que gera artefatos de build, testes e envia notificação sobre o pipeline via email. Esse repositório também era originalmente privado, para praticar outros pontos do Jenkins.
 
 # ToDo List em Go
 
